@@ -17,19 +17,19 @@ class App extends React.Component{
 
 	searchischanged = (event)=> {
 		this.setState({
-			robots: this.state.robots.filter(robo => {
-				return robo.name.toLowerCase().includes(event.target.value.toLowerCase());
-			}
-			)
+			filtername: event.target.value
 		})
 	}
 
 	render(){
+		const filteredbots = this.state.robots.filter(robo => {
+				return robo.name.toLowerCase().includes(this.state.filtername.toLowerCase());
+			})
 		return(
 		<div className = 'tc'>
 			<h1 className= 'code f2 washed-blue'> Robo friends </h1>
 			<Searchbox searchischanged={this.searchischanged} />
-			<CardList robots={this.state.robots}/>
+			<CardList robots={filteredbots}/>
 		</div>
 		);
 	}
@@ -37,3 +37,10 @@ class App extends React.Component{
 }
 
 export default App;
+
+/*this.setState({
+			robots: this.state.robots.filter(robo => {
+				return robo.name.toLowerCase().includes(event.target.value.toLowerCase());
+			}
+			)
+		})*/
