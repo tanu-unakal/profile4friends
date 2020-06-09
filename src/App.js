@@ -27,7 +27,7 @@ class App extends React.Component{
 	render(){
 		return(
 		<div className = 'tc'>
-			<h1> Robo friends </h1>
+			<h1 className= 'code f2 washed-blue'> Robo friends </h1>
 			<Searchbox searchischanged={this.searchischanged} />
 			<CardList robots={this.state.robots}/>
 		</div>
