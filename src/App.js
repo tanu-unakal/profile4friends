@@ -1,17 +1,27 @@
 import React from 'react';
-import {robots} from './Robots'
 import CardList from './CardList';
 import Searchbox from './Searchbox';
-
+import Scroll from './Scroll';
 
 
 class App extends React.Component{
 	constructor(){
 		super();
 		this.state = {
-			robots: robots,
+			robots: [],
 			filtername:''
 		}
+	}
+
+	componentDidMount(){
+		fetch('https://jsonplaceholder.typicode.com/users')
+			.then(response => {
+				return response.json();
+			})
+			.then(
+				users => {
+					this.setState({robots: users})
+				})
 	}
 
 
@@ -29,7 +39,9 @@ class App extends React.Component{
 		<div className = 'tc'>
 			<h1 className= 'code f2 washed-blue'> Robo friends </h1>
 			<Searchbox searchischanged={this.searchischanged} />
-			<CardList robots={filteredbots}/>
+			<Scroll>
+				<CardList robots={filteredbots}/>
+			</Scroll>
 		</div>
 		);
 	}
@@ -37,10 +49,3 @@ class App extends React.Component{
 }
 
 export default App;
-
-/*this.setState({
-			robots: this.state.robots.filter(robo => {
-				return robo.name.toLowerCase().includes(event.target.value.toLowerCase());
-			}
-			)
-		})*/
